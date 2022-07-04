@@ -1,6 +1,6 @@
-# learning_dart
+# spelling_bee_infographics
 
-A new Flutter project.
+A new Flutter project that was designed for a university gameshow
 
 ## Getting Started
 
