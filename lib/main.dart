@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       if (useCount == 0) {
         return Colors.grey;
       } else {
-        return powerupButtonDefaultColor;
+        return greyishBlue;
       }
     }
   }
@@ -58,8 +58,13 @@ class _HomePageState extends State<HomePage> {
     "LIABILITY",
     "RESIGNATION"
   ];
-  final List<String> _teamOne = ["Due Trung", "Hieu Thao", "Duy Minh"];
-  final List<String> _teamTwo = ["Yen Thy", "Vinh Nghi", "Le Hien"];
+  final List<String> _teamOne = ["Duệ Trung", "Hiếu Thảo", "Duy Minh"];
+  final List<String> _teamTwo = ["Yến Thy", "Vĩnh Nghị", "Thuý Hiền"];
+  final clockBackgroundColor = const Color.fromARGB(255, 226, 162, 94);
+  final greyishBlue = const Color.fromARGB(255, 48, 55, 71);
+  final lemonishYellow = const Color.fromARGB(255, 254, 218, 94);
+  final orangeYellow = const Color.fromARGB(255, 254, 195, 94);
+  final lightOrangeBackground = const Color.fromARGB(255, 237, 206, 127);
   int _widgetId = 1;
   int _scoreOne = 0, _scoreTwo = 0;
   int _starCountLeft = 1, _hourglassCountLeft = 2, _switchCountLeft = 1;
@@ -73,39 +78,38 @@ class _HomePageState extends State<HomePage> {
   bool _activateSwitchTwoLeft = false, _activateSwitchTwoRight = false;
   bool _activateSwitchThreeLeft = false, _activateSwitchThreeRight = false;
   int playerTurn = 0;
-  int _currentWord = 1;
   int _speltWords = 0;
 
   Widget _clockCountDown1() {
     return CircularCountDownTimer(
       key: const Key('first'),
-      ringColor: const Color.fromARGB(255, 254, 218, 93),
+      ringColor: Colors.transparent,
       width: MediaQuery.of(context).size.width / 2,
       height: MediaQuery.of(context).size.height / 2,
       duration: 60,
-      fillColor: Colors.amber,
+      fillColor: greyishBlue,
       controller: _controller,
-      backgroundColor: Colors.white70,
+      backgroundColor: clockBackgroundColor,
       strokeWidth: 10.0,
       strokeCap: StrokeCap.round,
       isReverse: true,
       isTimerTextShown: true,
       isReverseAnimation: true,
       autoStart: false,
-      textStyle: const TextStyle(fontSize: 70, color: Colors.black),
+      textStyle: TextStyle(fontSize: 70, color: greyishBlue),
     );
   }
 
   Widget _clockCountDown2() {
     return CircularCountDownTimer(
       key: const Key('second'),
-      ringColor: const Color.fromARGB(255, 254, 218, 93),
+      ringColor: Colors.transparent,
       width: MediaQuery.of(context).size.width / 2,
       height: MediaQuery.of(context).size.height / 2,
       duration: 80,
-      fillColor: Colors.amber,
+      fillColor: greyishBlue,
       controller: _controller,
-      backgroundColor: Colors.white70,
+      backgroundColor: clockBackgroundColor,
       strokeWidth: 10.0,
       strokeCap: StrokeCap.round,
       isReverse: true,
@@ -133,6 +137,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: lightOrangeBackground,
       /* 
       appBar: AppBar(
         title: const Text('SPELLING BEE TIMER'),
@@ -150,8 +155,10 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text('Total score: ${_scoreOne.toString()}',
-                      style: const TextStyle(
-                          fontSize: 25, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: greyishBlue)),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -167,6 +174,7 @@ class _HomePageState extends State<HomePage> {
                             _scorePowerUpOne = false;
                           });
                         },
+                        style: ElevatedButton.styleFrom(primary: Colors.green),
                         child: const Icon(Icons.add),
                       ),
                       const SizedBox(width: 10),
@@ -181,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                           },
                           style: ElevatedButton.styleFrom(
                             primary:
-                                !_scorePowerUpOne ? Colors.grey : Colors.blue,
+                                !_scorePowerUpOne ? Colors.grey : Colors.red,
                           ),
                           child: const Icon(Icons.remove)),
                     ],
@@ -196,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.green
                         : (_currentTurn(_speltWords) == 0
                             ? Colors.amber
-                            : Colors.blue),
+                            : greyishBlue),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     onPressed: () {
@@ -208,6 +216,14 @@ class _HomePageState extends State<HomePage> {
                     },
                     label: Text(
                       _teamOne[0],
+                      style: TextStyle(
+                          fontWeight: (_currentTurn(_speltWords) == 0
+                              ? FontWeight.bold
+                              : FontWeight.normal),
+                          fontSize: 25,
+                          color: (_currentTurn(_speltWords) == 0
+                              ? greyishBlue
+                              : Colors.white)),
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -216,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.green
                         : (_currentTurn(_speltWords) == 1
                             ? Colors.amber
-                            : Colors.blue),
+                            : greyishBlue),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     onPressed: () {
@@ -228,6 +244,14 @@ class _HomePageState extends State<HomePage> {
                     },
                     label: Text(
                       _teamOne[1],
+                      style: TextStyle(
+                          fontWeight: (_currentTurn(_speltWords) == 1
+                              ? FontWeight.bold
+                              : FontWeight.normal),
+                          fontSize: 25,
+                          color: (_currentTurn(_speltWords) == 1
+                              ? greyishBlue
+                              : Colors.white)),
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -236,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.green
                         : (_currentTurn(_speltWords) == 2
                             ? Colors.amber
-                            : Colors.blue),
+                            : greyishBlue),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     onPressed: () {
@@ -246,9 +270,15 @@ class _HomePageState extends State<HomePage> {
                         });
                       }
                     },
-                    label: Text(
-                      _teamOne[2],
-                    ),
+                    label: Text(_teamOne[2],
+                        style: TextStyle(
+                            fontWeight: (_currentTurn(_speltWords) == 2
+                                ? FontWeight.bold
+                                : FontWeight.normal),
+                            fontSize: 25,
+                            color: (_currentTurn(_speltWords) == 2
+                                ? greyishBlue
+                                : Colors.white))),
                   )
                 ],
               ),
@@ -311,8 +341,10 @@ class _HomePageState extends State<HomePage> {
             children: [
               Text(
                 'Current word: ${(_speltWords + 1)} of 15',
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: greyishBlue),
               ),
               Center(
                 child: AnimatedSwitcher(
@@ -333,7 +365,7 @@ class _HomePageState extends State<HomePage> {
                       lineHeight: 15,
                       percent: ((_speltWords + 1) / 15),
                       progressColor: Colors.amber,
-                      backgroundColor: Colors.black,
+                      backgroundColor: greyishBlue,
                     ),
                     const SizedBox(
                       height: 20,
@@ -342,8 +374,12 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                            onPressed: () {},
-                            child: const Icon(Icons.skip_next)),
+                          onPressed: () {},
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  greyishBlue)),
+                          child: const Icon(Icons.skip_next),
+                        ),
                         const SizedBox(
                           width: 5,
                         ),
@@ -351,10 +387,8 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               setState(() {
                                 if (_speltWords + 1 < 15) {
-                                  _currentWord++;
                                   _speltWords++;
                                 }
-
                                 _controller.reset();
                                 _timerExtendedOne = false;
                                 _timerExtendedTwo = false;
@@ -371,6 +405,10 @@ class _HomePageState extends State<HomePage> {
                                 }
                               });
                             },
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        greyishBlue)),
                             child: const Icon(Icons.arrow_right_alt_rounded))
                       ],
                     )
@@ -387,8 +425,10 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text('Total score: ${_scoreTwo.toString()}',
-                      style: const TextStyle(
-                          fontSize: 25, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: greyishBlue)),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -404,6 +444,8 @@ class _HomePageState extends State<HomePage> {
                               _scorePowerUpTwo = false;
                             });
                           },
+                          style:
+                              ElevatedButton.styleFrom(primary: Colors.green),
                           child: const Icon(Icons.add)),
                       const SizedBox(width: 10),
                       ElevatedButton(
@@ -417,7 +459,7 @@ class _HomePageState extends State<HomePage> {
                           },
                           style: ElevatedButton.styleFrom(
                             primary:
-                                !_scorePowerUpTwo ? Colors.grey : Colors.blue,
+                                !_scorePowerUpTwo ? Colors.grey : Colors.red,
                           ),
                           child: const Icon(Icons.remove)),
                     ],
@@ -432,7 +474,7 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.green
                         : (_currentTurn(_speltWords) == 0
                             ? Colors.amber
-                            : Colors.blue),
+                            : greyishBlue),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     onPressed: () {
@@ -440,9 +482,8 @@ class _HomePageState extends State<HomePage> {
                         _activateSwitchOneRight = true;
                       });
                     },
-                    label: Text(
-                      _teamTwo[0],
-                    ),
+                    label:
+                        Text(_teamTwo[0], style: const TextStyle(fontSize: 25)),
                   ),
                   const SizedBox(height: 5),
                   FloatingActionButton.extended(
@@ -450,7 +491,7 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.green
                         : (_currentTurn(_speltWords) == 1
                             ? Colors.amber
-                            : Colors.blue),
+                            : greyishBlue),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     onPressed: () {
@@ -458,9 +499,8 @@ class _HomePageState extends State<HomePage> {
                         _activateSwitchTwoRight = true;
                       });
                     },
-                    label: Text(
-                      _teamTwo[1],
-                    ),
+                    label:
+                        Text(_teamTwo[1], style: const TextStyle(fontSize: 25)),
                   ),
                   const SizedBox(height: 5),
                   FloatingActionButton.extended(
@@ -468,7 +508,7 @@ class _HomePageState extends State<HomePage> {
                         ? Colors.green
                         : (_currentTurn(_speltWords) == 2
                             ? Colors.amber
-                            : Colors.blue),
+                            : greyishBlue),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     onPressed: () {
@@ -476,9 +516,8 @@ class _HomePageState extends State<HomePage> {
                         _activateSwitchThreeRight = true;
                       });
                     },
-                    label: Text(
-                      _teamTwo[2],
-                    ),
+                    label:
+                        Text(_teamTwo[2], style: const TextStyle(fontSize: 25)),
                   )
                 ],
               ),
@@ -544,6 +583,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           // Timer control: Start, resume, and pause
           FloatingActionButton(
+            backgroundColor: greyishBlue,
             onPressed: () {
               setState(() {
                 if (!_isStarted && _isPaused) {
@@ -565,6 +605,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(width: 10),
           FloatingActionButton(
+            backgroundColor: greyishBlue,
             // timer reset button
             onPressed: () {
               setState(() {
@@ -594,6 +635,7 @@ class _HomePageState extends State<HomePage> {
             width: 10,
           ),
           FloatingActionButton(
+            backgroundColor: greyishBlue,
             onPressed: () {
               showDialog(
                   context: context,
